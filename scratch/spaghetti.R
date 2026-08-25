@@ -22,3 +22,5 @@ ggplot(
 ) +
   geom_point() +
   facet_wrap(~Ion)
+
+glimpse(bisley1)
