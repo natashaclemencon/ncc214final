@@ -1,3 +1,5 @@
+source(moving_average)
+
 library(tidyverse)
 
 bisley1 <- read_csv("data/knb-lter-luq.20.4923064/QuebradaCuenca1-Bisley.csv")
@@ -25,6 +27,7 @@ ggplot(
 ) +
   geom_point() +
   facet_wrap(~Ion)
+
 
 bisley_windows <- tibble(
   window_start = seq(
