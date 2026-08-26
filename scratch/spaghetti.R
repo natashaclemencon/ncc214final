@@ -12,7 +12,7 @@ bisley3$Dataset <- "Bisley 3"
 alldata <- bind_rows(bisley1, bisley2, bisley3, puenteroto)
 
 
-Pivoted_bisley1 <- bisley1 |>
+Pivoted_bisley3 <- bisley3 |>
   pivot_longer(
     cols = "NO3-N":"NH4-N",
     names_to = "Ion",
@@ -20,7 +20,7 @@ Pivoted_bisley1 <- bisley1 |>
   )
 
 ggplot(
-  data = Pivoted_bisley1,
+  data = Pivoted_bisley3,
   mapping = aes(x = Sample_Date, y = Concentration, color = Ion)
 ) +
   geom_point() +
