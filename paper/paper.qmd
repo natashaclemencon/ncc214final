@@ -1,0 +1,41 @@
+#background
+```{r}
+
+```
+
+#data
+
+```{r}
+library(tidyverse)
+source("../R/movingaverage.R")
+
+bisley1 <- read_csv(
+  "../data/knb-lter-luq.20.4923064/QuebradaCuenca1-Bisley.csv"
+)
+bisley2 <- read_csv(
+  "../data/knb-lter-luq.20.4923064/QuebradaCuenca2-Bisley.csv"
+)
+bisley3 <- read_csv(
+  "../data/knb-lter-luq.20.4923064/QuebradaCuenca3-Bisley.csv"
+)
+puenteroto <- read_csv(
+  "../data/knb-lter-luq.20.4923064/RioMameyesPuenteRoto.csv"
+)
+
+bisley1$Dataset <- "Bisley 1"
+bisley2$Dataset <- "Bisley 2"
+bisley3$Dataset <- "Bisley 3"
+
+alldata <- bind_rows(bisley1, bisley2, bisley3, puenteroto)
+```
+
+#methods
+```{r}
+
+```
+
+#results
+```{r}
+
+```
+
