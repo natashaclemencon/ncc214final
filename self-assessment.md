@@ -12,3 +12,4 @@ Not yet - I do have at least one function defined in the R/ folder, and used els
 ## The repo has an effective README
 Meets specs - My README contains all necessary components
 ## Code follows a professional style 
+My code does not yet follow a professional style, it's still pretty messy
