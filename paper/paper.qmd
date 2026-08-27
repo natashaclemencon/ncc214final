@@ -11,7 +11,6 @@ Data:
 * Recreating their Figure 3 is accomplished using the only dataframes QuebradaCuenca1-Bisley, QuebradaCuenca2-Bisley, QuebradaCuenca3-Bisley, and RioMameyesPuenteRoto. 
 ```{r}
 
-
 bisley1 <- read_csv(
   "../data/knb-lter-luq.20.4923064/QuebradaCuenca1-Bisley.csv"
 )
@@ -24,10 +23,6 @@ bisley3 <- read_csv(
 puenteroto <- read_csv(
   "../data/knb-lter-luq.20.4923064/RioMameyesPuenteRoto.csv"
 )
-
-bisley1$Dataset <- "Bisley 1"
-bisley2$Dataset <- "Bisley 2"
-bisley3$Dataset <- "Bisley 3"
 
 alldata <- bind_rows(bisley1, bisley2, bisley3, puenteroto)
 ```

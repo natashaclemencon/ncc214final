@@ -12,10 +12,10 @@ pivotedallplot <- alldata |>
     values_to = "Concentration"
   ) |>
   ggplot(
-    mapping = aes(x = Sample_Date, y = Concentration, color = Site)
+    mapping = aes(x = window_start, y = Concentration, color = Site)
   ) +
   geom_point() +
-  facet_wrap(~Ion)
+  facet_wrap(~Ion, scales = "free")
 
 pivotedallplot
 
