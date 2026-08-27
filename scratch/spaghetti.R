@@ -1,19 +1,26 @@
-source(moving_average)
+source("R/movingaverage.R")
 
 library(tidyverse)
 
-bisley1 <- read_csv("data/knb-lter-luq.20.4923064/QuebradaCuenca1-Bisley.csv")
-bisley2 <- read_csv("data/knb-lter-luq.20.4923064/QuebradaCuenca2-Bisley.csv")
-bisley3 <- read_csv("data/knb-lter-luq.20.4923064/QuebradaCuenca3-Bisley.csv")
-puenteroto <- read_csv("data/knb-lter-luq.20.4923064/RioMameyesPuenteRoto.csv")
-
-bisley1$Dataset <- "Bisley 1"
-bisley2$Dataset <- "Bisley 2"
-bisley3$Dataset <- "Bisley 3"
-
-alldata <- bind_rows(bisley1, bisley2, bisley3, puenteroto)
+alldata <- read_csv("output/output.csv")
 
 
+pivotedallplot <- alldata |>
+  pivot_longer(
+    cols = c(K, NO3, Mg, Na, NH4N),
+    names_to = "Ion",
+    values_to = "Concentration"
+  ) |>
+  ggplot(
+    mapping = aes(x = Sample_Date, y = Concentration, color = Site)
+  ) +
+  geom_point() +
+  facet_wrap(~Ion)
+
+pivotedallplot
+
+
+##### bad
 Pivoted_bisley3 <- bisley3 |>
   pivot_longer(
     cols = "NO3-N":"NH4-N",
@@ -70,3 +77,5 @@ ggplot(
   facet_wrap(~Ion, scales = "free")
 
 ## do i now need to just do all of this exact stuff but w my big dataset
+
+##thursday work

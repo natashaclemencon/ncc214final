@@ -1,13 +1,16 @@
 #background
-```{r}
-
-```
-
-#data
-
+This repository serves to recreate Figure 3 of the paper "Effects of hurricane disturbance on stream water concentrations and fluxes in eight tropical forest watersheds of the Luquillo Experimental Forest, Puerto Rico" using the author's data stored at https://doi.org/10.6073/PASTA/F31349BEBDC304F758718F4798D25458. Recreating this project requires downloading this data, as well as the tidyverse library. 
 ```{r}
 library(tidyverse)
 source("../R/movingaverage.R")
+```
+
+#data
+Data: 
+* All dataframes from the above DOI are stored in the folder titled data/knb-lter-luq.20.4923064.
+* Recreating their Figure 3 is accomplished using the only dataframes QuebradaCuenca1-Bisley, QuebradaCuenca2-Bisley, QuebradaCuenca3-Bisley, and RioMameyesPuenteRoto. 
+```{r}
+
 
 bisley1 <- read_csv(
   "../data/knb-lter-luq.20.4923064/QuebradaCuenca1-Bisley.csv"
@@ -30,7 +33,15 @@ alldata <- bind_rows(bisley1, bisley2, bisley3, puenteroto)
 ```
 
 #methods
+We created a 
 ```{r}
+
+movingaverage(bisley1)
+movingaverage(bisley2)
+movingaverage(bisley3)
+movingaverage(puenteroto)
+
+all4bound <- 
 
 ```
 
