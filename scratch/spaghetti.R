@@ -14,10 +14,11 @@ pivotedallplot <- alldata |>
   ggplot(
     mapping = aes(x = window_start, y = Concentration, color = Site)
   ) +
-  geom_point() +
-  facet_wrap(~Ion, scales = "free")
-
+  geom_line() +
+  facet_wrap(~Ion, ncol = 1, scales = "free")
 pivotedallplot
+
+ggsave("scratch/figure-3-reproduction.png")
 
 
 ##### bad
@@ -79,3 +80,27 @@ ggplot(
 ## do i now need to just do all of this exact stuff but w my big dataset
 
 ##thursday work
+
+#ggplot
+
+source("R/movingaverage.R")
+
+library(tidyverse)
+
+alldata <- read_csv("output/output.csv")
+
+
+pivotedallplot <- alldata |>
+  pivot_longer(
+    cols = c(K, NO3, Mg, Na, NH4N),
+    names_to = "Ion",
+    values_to = "Concentration"
+  ) |>
+  ggplot(
+    mapping = aes(x = window_start, y = Concentration, color = Site)
+  ) +
+  geom_point() +
+  facet_wrap(~Ion, ncol = 1, scales = "free")
+pivotedallplot
+
+ggsave("output/figure-3-reproduction.png")

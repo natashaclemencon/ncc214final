@@ -1,47 +1,36 @@
-#background
-This repository serves to recreate Figure 3 of the paper "Effects of hurricane disturbance on stream water concentrations and fluxes in eight tropical forest watersheds of the Luquillo Experimental Forest, Puerto Rico" using the author's data stored at https://doi.org/10.6073/PASTA/F31349BEBDC304F758718F4798D25458. Recreating this project requires downloading this data, as well as the tidyverse library. 
+## Recreating Figure 3 of "Effects of hurricane disturbance on stream water concentrations and fluxes in eight tropical forest watersheds of the Luquillo Experimental Forest, Puerto Rico" by Schaefer et al. 
+
+# Background
+This repository serves to recreate Figure 3 of the paper "Effects of hurricane disturbance on stream water concentrations and fluxes in eight tropical forest watersheds of the Luquillo Experimental Forest, Puerto Rico" using the author's data stored at https://doi.org/10.6073/PASTA/F31349BEBDC304F758718F4798D25458. Recreating this project required the tidyverse library.
+
+# Data
+Data: 
+* All necessary dataframes used in this analysis (QuebradaCuenca1-Bisley.csv, QuebradaCuenca2-Bisley, QuebradaCuenca3-Bisley, and RioMameyesPuenteRoto.csv) are stored in the data folder. The data is cleaned and sorted in the 1_clean_data.R scripts.
+
+# Methods
+In order to recreate Figure 3, I created a moving average function, which I later sourced to find the moving averages of each of the four sites. I combined each of the sites into one comprehensive data frame of moving averages called alldata. alldata is read in from the output.csv. 
 ```{r}
 library(tidyverse)
-source("../R/movingaverage.R")
+alldata <- read_csv("../output/output.csv")
 ```
 
-#data
-Data: 
-* All dataframes from the above DOI are stored in the folder titled data/knb-lter-luq.20.4923064.
-* Recreating their Figure 3 is accomplished using the only dataframes QuebradaCuenca1-Bisley, QuebradaCuenca2-Bisley, QuebradaCuenca3-Bisley, and RioMameyesPuenteRoto. 
+# Results
+This next chunk of code recreates the graph from Figure 3 of the referenced article. It demonstrates the ion concentrations between 1988 and 1994 of K, Mg, Na, NH4N, and NO3 in the Bisley1, Bisley2, Bisley3, and Puente Roto sites.  
 ```{r}
+# Pivot the new data frame to get a column for ion type
+pivotedallplot <- alldata |>
+  pivot_longer(
+    cols = c(K, NO3, Mg, Na, NH4N),
+    names_to = "Ion",
+    values_to = "Concentration"
+  ) |>
+  #Map it!
+  ggplot(
+    mapping = aes(x = window_start, y = Concentration, color = Site)
+  ) +
+  geom_line() +
+  facet_wrap(~Ion, ncol = 1, scales = "free")
 
-bisley1 <- read_csv(
-  "../data/knb-lter-luq.20.4923064/QuebradaCuenca1-Bisley.csv"
-)
-bisley2 <- read_csv(
-  "../data/knb-lter-luq.20.4923064/QuebradaCuenca2-Bisley.csv"
-)
-bisley3 <- read_csv(
-  "../data/knb-lter-luq.20.4923064/QuebradaCuenca3-Bisley.csv"
-)
-puenteroto <- read_csv(
-  "../data/knb-lter-luq.20.4923064/RioMameyesPuenteRoto.csv"
-)
-
-alldata <- bind_rows(bisley1, bisley2, bisley3, puenteroto)
-```
-
-#methods
-We created a 
-```{r}
-
-movingaverage(bisley1)
-movingaverage(bisley2)
-movingaverage(bisley3)
-movingaverage(puenteroto)
-
-all4bound <- 
-
-```
-
-#results
-```{r}
-
+pivotedallplot
 ```
 
